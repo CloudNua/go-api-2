@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/CloudNua/go-api-2/src/common/models"
+	"github.com/CloudNua/go-api-2/pkg/common/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
