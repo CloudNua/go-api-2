@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"os"
 
+	"github.com/CloudNua/go-api-2/pkg/comments"
+	"github.com/CloudNua/go-api-2/pkg/common/db"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
+	"github.com/spf13/viper"
 )
 
 // Run - is going to be responsible for
@@ -24,21 +26,45 @@ func setupRouter() *gin.Engine {
 		fmt.Println(err)
 	}
 
+	viper.SetConfigFile("./pkg/common/envs/.env")
+	viper.ReadInConfig()
+
+	// port := viper.Get("PORT").(string)
+	// dbUrl := viper.Get("DB_URL").(string)
+
+	dsn := fmt.Sprintf(
+		"host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_USERNAME"),
+		os.Getenv("DB_TABLE"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("SSL_MODE"),
+	)
+
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
+	h := db.InitDatabase(dsn)
+
+	comments.RegisterRoutes(r, h)
+
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(200, gin.H{
+			"message": "CloudNua Comment Service",
 		})
 	})
 
-	log, _ := zap.NewDevelopment()
-	defer log.Sync()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
 
 	return r
 }
 
 func main() {
 	r := setupRouter()
+
 	// Listen and Server in 0.0.0.0:8080
 	r.Run(":8080")
 }

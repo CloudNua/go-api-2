@@ -1,32 +1,16 @@
 package db
 
 import (
-	"fmt"
 	"log"
-	"os"
 
 	"github.com/CloudNua/go-api-2/pkg/common/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-type Database struct {
-	Client *gorm.DB
-}
+func InitDatabase(url string) *gorm.DB {
 
-func Init(url string) (*Database, error) {
-
-	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_USERNAME"),
-		os.Getenv("DB_TABLE"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("SSL_MODE"),
-	)
-
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(url), &gorm.Config{})
 
 	if err != nil {
 		log.Fatalln(err)
@@ -34,7 +18,5 @@ func Init(url string) (*Database, error) {
 
 	db.AutoMigrate(&models.Comment{})
 
-	return &Database{
-		Client: db,
-	}, nil
+	return db
 }

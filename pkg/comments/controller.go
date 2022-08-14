@@ -1,4 +1,4 @@
-package comment
+package comments
 
 import (
 	"github.com/gin-gonic/gin"
@@ -13,8 +13,8 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 	h := &handler{
 		DB: db,
 	}
-
-	routes := router.Group("/comment")
-	routes.POST("/", h.AddComment)
-	routes.GET("/", h.GetComments)
+	// Simple group: v1
+	routes := router.Group("/v1/comment")
+	routes.POST("", h.AddComment)
+	routes.GET("", h.GetComments)
 }
