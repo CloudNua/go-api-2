@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+
+  api:
+    build: .
+    container_name: "gin-rest-api"
+    ports:
+      - "8080:8080"

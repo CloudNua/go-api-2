@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -o app cmd/server/main.go
+
+  run:
+    cmds:
+      - docker-compose up --build
+
+  test:
+    cmds:
+      - go test -v ./...
