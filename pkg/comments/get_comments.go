@@ -21,7 +21,7 @@ import (
 // @Failure      500  {object}  httputil.HTTPError
 // @Router       /comments [get]
 func (h handler) GetComments(ctx *gin.Context) {
-	comments := models.Comment{}
+	var comments []models.Comment
 
 	if result := h.DB.Find(&comments); result.Error != nil {
 		httputil.NewError(ctx, http.StatusNotFound, result.Error)

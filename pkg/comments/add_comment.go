@@ -7,7 +7,6 @@ import (
 	"github.com/CloudNua/go-api-2/pkg/httputil"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
-	"github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
 // AddComment godoc
