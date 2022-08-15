@@ -6,6 +6,7 @@ import (
 	"github.com/CloudNua/go-api-2/pkg/common/models"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
+	"github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
 type AddCommentRequestBody struct {
@@ -15,6 +16,17 @@ type AddCommentRequestBody struct {
 	Slug   string `json:"slug"`
 }
 
+// @BasePath /v1/comment
+
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description do ping
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Helloworld
+// @Router /example/helloworld [get]
 func (h handler) AddComment(ctx *gin.Context) {
 	body := AddCommentRequestBody{}
 
