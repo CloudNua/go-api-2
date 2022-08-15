@@ -4,34 +4,31 @@ import (
 	"net/http"
 
 	"github.com/CloudNua/go-api-2/pkg/common/models"
+	"github.com/CloudNua/go-api-2/pkg/httputil"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
-type AddCommentRequestBody struct {
-	ID     string `json:"id"`
-	Title  string `json:"title"`
-	Author string `json:"author"`
-	Slug   string `json:"slug"`
-}
-
-// @BasePath /v1/comment
-
-// PingExample godoc
-// @Summary ping example
-// @Schemes
-// @Description do ping
-// @Tags example
-// @Accept json
-// @Produce json
-// @Success 200 {string} Helloworld
-// @Router /example/helloworld [get]
+// AddComment godoc
+// @Summary      Add a comment
+// @Description  add by json comment
+// @Tags         comments
+// @Accept       json
+// @Produce      json
+// @Param        comment  body      models.AddCommentRequestBody  true  "Add comment"
+// @Success      200      {object}  models.AddCommentRequestBody
+// @Failure      400      {object}  httputil.HTTPError
+// @Failure      404      {object}  httputil.HTTPError
+// @Failure      500      {object}  httputil.HTTPError
+// @Router       /comments [post]
 func (h handler) AddComment(ctx *gin.Context) {
-	body := AddCommentRequestBody{}
+
+	body := models.AddCommentRequestBody{}
 
 	if err := ctx.BindJSON(&body); err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+		httputil.NewError(ctx, http.StatusBadRequest, err)
+		// ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
@@ -43,7 +40,8 @@ func (h handler) AddComment(ctx *gin.Context) {
 	comment.Slug = body.Slug
 
 	if result := h.DB.Create(&comment); result.Error != nil {
-		ctx.AbortWithError(http.StatusNotFound, result.Error)
+		httputil.NewError(ctx, http.StatusNotFound, result.Error)
+		// ctx.AbortWithError(http.StatusNotFound, result.Error)
 		return
 	}
 

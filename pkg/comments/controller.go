@@ -14,7 +14,12 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 		DB: db,
 	}
 	// Simple group: v1
-	routes := router.Group("/v1/comment")
-	routes.POST("", h.AddComment)
-	routes.GET("", h.GetComments)
+	v1 := router.Group("/api/v1/")
+	{
+		comments := v1.Group("/comments")
+		{
+			comments.POST("", h.AddComment)
+			comments.GET("", h.GetComments)
+		}
+	}
 }

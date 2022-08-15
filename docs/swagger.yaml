@@ -1,0 +1,115 @@
+basePath: /v1/comment
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  models.AddCommentRequestBody:
+    properties:
+      author:
+        type: string
+      id:
+        description: gorm.Model
+        type: string
+      slug:
+        type: string
+      title:
+        type: string
+    type: object
+  models.Comment:
+    properties:
+      author:
+        type: string
+      id:
+        description: gorm.Model        // adds ID, Title, Author & Slug
+        type: string
+      slug:
+        type: string
+      title:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample CRUD HTTP service.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: 'CloudNua: Comment Service'
+  version: "1.0"
+paths:
+  /comments:
+    get:
+      consumes:
+      - application/json
+      description: get comments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Comment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: List Comments
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/json
+      description: add by json comment
+      parameters:
+      - description: Add comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/models.AddCommentRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AddCommentRequestBody'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Add a comment
+      tags:
+      - comments
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
