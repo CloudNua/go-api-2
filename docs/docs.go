@@ -51,19 +51,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError400"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError500"
                         }
                     }
                 }
@@ -101,19 +101,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError400"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError"
+                            "$ref": "#/definitions/httputil.HTTPError500"
                         }
                     }
                 }
@@ -121,7 +121,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "httputil.HTTPError": {
+        "httputil.HTTPError400": {
             "type": "object",
             "properties": {
                 "code": {
@@ -131,6 +131,32 @@ const docTemplate = `{
                 "message": {
                     "type": "string",
                     "example": "status bad request"
+                }
+            }
+        },
+        "httputil.HTTPError404": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 404
+                },
+                "message": {
+                    "type": "string",
+                    "example": "not found"
+                }
+            }
+        },
+        "httputil.HTTPError500": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 500
+                },
+                "message": {
+                    "type": "string",
+                    "example": "internal server error"
                 }
             }
         },

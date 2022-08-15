@@ -1,12 +1,30 @@
 basePath: /v1/comment
 definitions:
-  httputil.HTTPError:
+  httputil.HTTPError400:
     properties:
       code:
         example: 400
         type: integer
       message:
         example: status bad request
+        type: string
+    type: object
+  httputil.HTTPError404:
+    properties:
+      code:
+        example: 404
+        type: integer
+      message:
+        example: not found
+        type: string
+    type: object
+  httputil.HTTPError500:
+    properties:
+      code:
+        example: 500
+        type: integer
+      message:
+        example: internal server error
         type: string
     type: object
   models.AddCommentRequestBody:
@@ -64,15 +82,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError400'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError404'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError500'
       summary: List Comments
       tags:
       - comments
@@ -97,15 +115,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError400'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError404'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/httputil.HTTPError'
+            $ref: '#/definitions/httputil.HTTPError500'
       summary: Add a comment
       tags:
       - comments
