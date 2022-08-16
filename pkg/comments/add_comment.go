@@ -16,10 +16,9 @@ import (
 // @Accept       json
 // @Produce      json
 // @Param        comment  body      models.AddCommentRequestBody  true  "Add comment"
-// @Success      200      {object}  models.AddCommentRequestBody
+// @Success      201      {object}  models.Comment
 // @Failure      400      {object}  httputil.HTTPError400
 // @Failure      404      {object}  httputil.HTTPError404
-// @Failure      500      {object}  httputil.HTTPError500
 // @Router       /comments [post]
 func (h handler) AddComment(ctx *gin.Context) {
 
@@ -44,5 +43,5 @@ func (h handler) AddComment(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, &comment)
+	ctx.JSON(http.StatusCreated, &comment.ID)
 }

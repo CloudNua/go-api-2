@@ -60,10 +60,34 @@ const docTemplate = `{
                             "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError405"
+                        }
+                    },
+                    "408": {
+                        "description": "Request Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError408"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/httputil.HTTPError500"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError503"
+                        }
+                    },
+                    "505": {
+                        "description": "HTTP Version Not Supported",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError505"
                         }
                     }
                 }
@@ -95,7 +119,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.AddCommentRequestBody"
+                            "$ref": "#/definitions/models.Comment"
                         }
                     },
                     "400": {
@@ -110,10 +134,34 @@ const docTemplate = `{
                             "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError405"
+                        }
+                    },
+                    "408": {
+                        "description": "Request Timeout",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError408"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/httputil.HTTPError500"
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError503"
+                        }
+                    },
+                    "505": {
+                        "description": "HTTP Version Not Supported",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError505"
                         }
                     }
                 }
@@ -139,11 +187,37 @@ const docTemplate = `{
             "properties": {
                 "code": {
                     "type": "integer",
+                    "example": 400
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status not found"
+                }
+            }
+        },
+        "httputil.HTTPError405": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
                     "example": 404
                 },
                 "message": {
                     "type": "string",
-                    "example": "not found"
+                    "example": "status method not allowed"
+                }
+            }
+        },
+        "httputil.HTTPError408": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 408
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status request timeout"
                 }
             }
         },
@@ -156,7 +230,33 @@ const docTemplate = `{
                 },
                 "message": {
                     "type": "string",
-                    "example": "internal server error"
+                    "example": "status internal server error"
+                }
+            }
+        },
+        "httputil.HTTPError503": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 503
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status service unavailable"
+                }
+            }
+        },
+        "httputil.HTTPError505": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 505
+                },
+                "message": {
+                    "type": "string",
+                    "example": "status HTTP version not supported"
                 }
             }
         },

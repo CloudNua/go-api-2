@@ -15,10 +15,8 @@ import (
 // @Tags         comments
 // @Accept       json
 // @Produce      json
-// @Success      200  {array}   models.Comment
-// @Failure      400  {object}  httputil.HTTPError400
-// @Failure      404  {object}  httputil.HTTPError404
-// @Failure      500  {object}  httputil.HTTPError500
+// @Success      200  	{array}   models.Comment
+// @Failure      404    {object}  httputil.HTTPError404
 // @Router       /comments [get]
 func (h handler) GetComments(ctx *gin.Context) {
 	var comments []models.Comment

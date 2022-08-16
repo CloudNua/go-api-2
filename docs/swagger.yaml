@@ -12,10 +12,28 @@ definitions:
   httputil.HTTPError404:
     properties:
       code:
+        example: 400
+        type: integer
+      message:
+        example: status not found
+        type: string
+    type: object
+  httputil.HTTPError405:
+    properties:
+      code:
         example: 404
         type: integer
       message:
-        example: not found
+        example: status method not allowed
+        type: string
+    type: object
+  httputil.HTTPError408:
+    properties:
+      code:
+        example: 408
+        type: integer
+      message:
+        example: status request timeout
         type: string
     type: object
   httputil.HTTPError500:
@@ -24,7 +42,25 @@ definitions:
         example: 500
         type: integer
       message:
-        example: internal server error
+        example: status internal server error
+        type: string
+    type: object
+  httputil.HTTPError503:
+    properties:
+      code:
+        example: 503
+        type: integer
+      message:
+        example: status service unavailable
+        type: string
+    type: object
+  httputil.HTTPError505:
+    properties:
+      code:
+        example: 505
+        type: integer
+      message:
+        example: status HTTP version not supported
         type: string
     type: object
   models.AddCommentRequestBody:
@@ -87,10 +123,26 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/httputil.HTTPError404'
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: '#/definitions/httputil.HTTPError405'
+        "408":
+          description: Request Timeout
+          schema:
+            $ref: '#/definitions/httputil.HTTPError408'
         "500":
           description: Internal Server Error
           schema:
             $ref: '#/definitions/httputil.HTTPError500'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/httputil.HTTPError503'
+        "505":
+          description: HTTP Version Not Supported
+          schema:
+            $ref: '#/definitions/httputil.HTTPError505'
       summary: List Comments
       tags:
       - comments
@@ -111,7 +163,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.AddCommentRequestBody'
+            $ref: '#/definitions/models.Comment'
         "400":
           description: Bad Request
           schema:
@@ -120,10 +172,26 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/httputil.HTTPError404'
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: '#/definitions/httputil.HTTPError405'
+        "408":
+          description: Request Timeout
+          schema:
+            $ref: '#/definitions/httputil.HTTPError408'
         "500":
           description: Internal Server Error
           schema:
             $ref: '#/definitions/httputil.HTTPError500'
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: '#/definitions/httputil.HTTPError503'
+        "505":
+          description: HTTP Version Not Supported
+          schema:
+            $ref: '#/definitions/httputil.HTTPError505'
       summary: Add a comment
       tags:
       - comments
