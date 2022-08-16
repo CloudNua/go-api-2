@@ -6,7 +6,6 @@ import (
 	"github.com/CloudNua/go-api-2/pkg/common/models"
 	"github.com/CloudNua/go-api-2/pkg/httputil"
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
 )
 
 // AddComment godoc
@@ -32,7 +31,7 @@ func (h handler) AddComment(ctx *gin.Context) {
 
 	var comment models.Comment
 
-	comment.ID = uuid.NewV4().String()
+	// comment.ID = uuid.NewV4().String()
 	comment.Title = body.Title
 	comment.Author = body.Author
 	comment.Slug = body.Slug
@@ -43,5 +42,5 @@ func (h handler) AddComment(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, &comment.ID)
+	ctx.JSON(http.StatusCreated, &comment)
 }

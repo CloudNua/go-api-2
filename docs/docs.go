@@ -48,46 +48,10 @@ const docTemplate = `{
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError400"
-                        }
-                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/httputil.HTTPError404"
-                        }
-                    },
-                    "405": {
-                        "description": "Method Not Allowed",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError405"
-                        }
-                    },
-                    "408": {
-                        "description": "Request Timeout",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError408"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError500"
-                        }
-                    },
-                    "503": {
-                        "description": "Service Unavailable",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError503"
-                        }
-                    },
-                    "505": {
-                        "description": "HTTP Version Not Supported",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError505"
                         }
                     }
                 }
@@ -116,6 +80,99 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError400"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError404"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/{id}": {
+            "get": {
+                "description": "get string by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Get specific comment",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Comment"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError404"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update by json comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Update a comment",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update comment",
+                        "name": "comment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateCommentRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
@@ -134,34 +191,53 @@ const docTemplate = `{
                             "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     },
-                    "405": {
-                        "description": "Method Not Allowed",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError405"
-                        }
-                    },
-                    "408": {
-                        "description": "Request Timeout",
-                        "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError408"
-                        }
-                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/httputil.HTTPError500"
                         }
-                    },
-                    "503": {
-                        "description": "Service Unavailable",
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete by comment ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Delete a comment",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError503"
+                            "$ref": "#/definitions/models.Comment"
                         }
                     },
-                    "505": {
-                        "description": "HTTP Version Not Supported",
+                    "400": {
+                        "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/httputil.HTTPError505"
+                            "$ref": "#/definitions/httputil.HTTPError400"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError404"
                         }
                     }
                 }
@@ -195,32 +271,6 @@ const docTemplate = `{
                 }
             }
         },
-        "httputil.HTTPError405": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 404
-                },
-                "message": {
-                    "type": "string",
-                    "example": "status method not allowed"
-                }
-            }
-        },
-        "httputil.HTTPError408": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 408
-                },
-                "message": {
-                    "type": "string",
-                    "example": "status request timeout"
-                }
-            }
-        },
         "httputil.HTTPError500": {
             "type": "object",
             "properties": {
@@ -234,46 +284,17 @@ const docTemplate = `{
                 }
             }
         },
-        "httputil.HTTPError503": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 503
-                },
-                "message": {
-                    "type": "string",
-                    "example": "status service unavailable"
-                }
-            }
-        },
-        "httputil.HTTPError505": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "example": 505
-                },
-                "message": {
-                    "type": "string",
-                    "example": "status HTTP version not supported"
-                }
-            }
-        },
         "models.AddCommentRequestBody": {
             "type": "object",
             "properties": {
                 "author": {
                     "type": "string"
                 },
-                "id": {
-                    "description": "gorm.Model",
-                    "type": "string"
-                },
                 "slug": {
                     "type": "string"
                 },
                 "title": {
+                    "description": "gorm.Model\nID     string ` + "`" + `json:\"id\"` + "`" + `",
                     "type": "string"
                 }
             }
@@ -284,8 +305,19 @@ const docTemplate = `{
                 "author": {
                     "type": "string"
                 },
-                "id": {
-                    "description": "gorm.Model        // adds ID, Title, Author \u0026 Slug",
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "description": "gorm.Model // adds ID, Title, Author \u0026 Slug\nID     string ` + "`" + `json:\"id\" gorm:\"primary_key\"` + "`" + `",
+                    "type": "string"
+                }
+            }
+        },
+        "models.UpdateCommentRequestBody": {
+            "type": "object",
+            "properties": {
+                "author": {
                     "type": "string"
                 },
                 "slug": {

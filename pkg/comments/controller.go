@@ -20,6 +20,9 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 		{
 			comments.POST("", h.AddComment)
 			comments.GET("", h.GetComments)
+			comments.GET("/:id", h.GetComment)
+			comments.PUT("/:id", h.UpdateComment)
+			comments.DELETE("/:id", h.DeleteComment)
 		}
 	}
 }
