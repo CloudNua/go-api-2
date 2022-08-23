@@ -63,10 +63,10 @@ definitions:
 host: localhost:8080
 info:
   contact:
-    email: support@swagger.io
-    name: API Support
+    email: support@cloudnua.io
+    name: CloudNua API Support
     url: http://www.swagger.io/support
-  description: This is a sample CRUD HTTP service.
+  description: This is a simple CRUD HTTP service.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html

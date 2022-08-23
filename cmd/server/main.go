@@ -14,12 +14,12 @@ import (
 
 // @title           CloudNua: Comment Service
 // @version         1.0
-// @description     This is a sample CRUD HTTP service.
+// @description     This is a simple CRUD HTTP service.
 // @termsOfService  http://swagger.io/terms/
 
-// @contact.name   API Support
+// @contact.name   CloudNua API Support
 // @contact.url    http://www.swagger.io/support
-// @contact.email  support@swagger.io
+// @contact.email  support@cloudnua.io
 
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html

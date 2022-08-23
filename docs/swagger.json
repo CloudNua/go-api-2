@@ -1,13 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample CRUD HTTP service.",
+        "description": "This is a simple CRUD HTTP service.",
         "title": "CloudNua: Comment Service",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "name": "API Support",
+            "name": "CloudNua API Support",
             "url": "http://www.swagger.io/support",
-            "email": "support@swagger.io"
+            "email": "support@cloudnua.io"
         },
         "license": {
             "name": "Apache 2.0",

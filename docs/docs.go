@@ -12,9 +12,9 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "name": "API Support",
+            "name": "CloudNua API Support",
             "url": "http://www.swagger.io/support",
-            "email": "support@swagger.io"
+            "email": "support@cloudnua.io"
         },
         "license": {
             "name": "Apache 2.0",
@@ -343,7 +343,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/v1/comment",
 	Schemes:          []string{},
 	Title:            "CloudNua: Comment Service",
-	Description:      "This is a sample CRUD HTTP service.",
+	Description:      "This is a simple CRUD HTTP service.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
